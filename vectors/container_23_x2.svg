@@ -1,0 +1,19 @@
+<svg width="194" height="204" viewBox="0 0 194 204" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g filter="url(#filterI1_491;169_3102)">
+<path d="M194,101.585C194,157.366 150.572,202.585 97,202.585C43.428,202.585 0,157.366 0,101.585C0,45.804 43.428,0.585 97,0.585C150.572,0.585 194,45.804 194,101.585Z" fill="#456EFF"/>
+</g>
+<path d="M42,156.585L42,83.252L97,46.585L152,83.252L152,156.585L110.75,156.585L110.75,113.807L83.25,113.807L83.25,156.585L42,156.585Z" fill="#FFFFFF"/>
+<defs>
+<filter id="filterI1_491;169_3102" x="-4" y="-3.415039" width="105" height="109" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="0" operator="dilate" in="SourceAlpha" result="0dropshadow"/>
+<feOffset dx="0" dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="0dropshadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="0dropshadow" result="shape"/>
+</filter>
+</defs>
+</svg>

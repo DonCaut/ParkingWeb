@@ -1,0 +1,467 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(243, 246, 255, 1);
+}
+
+.content {
+  text-align: center;
+  display: none; /* Oculta todo el contenido por defecto */
+}
+
+.content.active {
+  display: block; /* Muestra el contenido activo */
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+                         /*todo lo que corresponde a la pagina1       */
+.container-web {
+  margin-top: -180px; 
+}
+
+.parking-web {
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 5px auto 5px auto;
+  display: block;
+  overflow-wrap: break-word;
+  font-family: 'Monoton';
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: 0.5px;
+  color: #000000;
+  text-align: center;
+  max-width: fit-content; 
+}
+
+.ulagos {
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 20px auto 5px auto;;
+  display: block;
+  overflow-wrap: break-word;
+  font-family: 'Monoton';
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: 0.5px;
+  color: #000000;
+  text-align: center;
+  max-width: fit-content;
+}
+
+.boton1 {
+  border-radius: 27.5px;
+  background-color: #567DF4;
+  color: white;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px auto;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 300px;
+  box-sizing: border-box;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.boton1:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid #567DF4;
+}
+
+ /*todo lo que corresponde a la pagina 2       */
+
+ .buscas-lugar {
+  margin: 0 0 3px 100px;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Luckiest Guy';
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.5;
+  color: #273BF4;
+  
+ }
+
+ .image-container {
+  width: 1453px;
+  height: 392px;
+  overflow: hidden; /* Oculta el desbordamiento */
+  position: relative; 
+}
+
+ .imagen1 {
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+  position: relative;
+  top: -200px; /* para cortar la parte superior de la imagen */
+ }
+
+ .inicie-sesion-texto {
+  margin: 0 92px 31px 92px;
+  display: inline-block;
+  align-self: flex-end;
+  overflow-wrap: break-word;
+  font-family: 'Lao Sans Pro';
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.5;
+  color: var(--black, #192342);
+ }
+
+ .login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.login-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  width: 400px;
+  height: 40px;
+  font-size: 25px;
+}
+
+.login-form input::placeholder {
+  font-size: 14px; 
+}
+
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+}
+
+button.boton-submit {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #567DF4;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.boton-submit:hover {
+  background-color: #456bda;
+}
+
+.caja-input {
+  opacity: 0.8;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  background: #C6D4FF;
+  position: relative;
+}
+
+.imagenP3Container {
+  width: 1440px;
+  height: 489px;
+  overflow: hidden; 
+  position: relative;
+  margin: 0 auto 19.3px auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0; 
+  box-sizing: border-box;
+  
+}
+
+.imagenP3 {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; /* Corta la imagen para que se ajuste al contenedor */
+  position: absolute;
+  top: 0; /* Ajusta la imagen para que comience desde la parte superior del contenedor */
+  left: 0;
+ }
+
+.contenedor-botones-p3 {
+  display: flex;
+  flex-direction: column; /* Poner los botones en una columna */
+  align-items: center;    /* Centrar los botones horizontalmente */
+  gap: 10px;              /* Espacio entre los botones */
+}
+
+ .boton-cuenta {
+  display: block;
+  opacity: 0.8;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  background: #C6D4FF;
+  position: relative;
+  width: 528px;
+  height: 50px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.7;
+  color: #192342;
+  line-height: 1.2;
+
+ }
+
+ .textoP3{
+  margin: 0 0 18.7px 4.7px;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.5;
+  color: var(--black, #192342);
+ }
+
+  /*todo lo que corresponde a la pagina de registrar cuenta*/
+ .container-registrar .registrar-cuenta-texto {
+  margin: 0 32.1px 8px 32.1px;
+  display: block;
+  overflow-wrap: break-word;
+  font-family: 'Inter';
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  color: var(--cloudi-blue, #2957C2);
+ }
+
+.container-registrar .input-container-registro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+
+.container-registrar .form-group-registro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.container-registrar .form-group-registro label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-right:auto;
+  overflow-wrap: break-word;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--cloudiblack, #000000);
+}
+
+.container-registrar .registrar-texto-ingresa{
+  margin: 0 84.1px 44px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Lao Sans Pro';
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.5;
+  color: var(--black, #192342);
+
+}
+
+ .container-registrar {
+  background: #FFFFFF;
+  display: block;
+  padding: 47px 95px 0 95px;
+  width: 1440px;
+  box-sizing: border-box;
+ }
+ .container-ambos {
+  display: flex;
+}
+
+ .imagen-container {
+  flex: 40%; /* La imagen ocupa el 40% del ancho */
+}
+
+.imagen-container img {
+  width: 100%; 
+  height: auto; /* Altura automática para mantener la proporción */
+  transform: scale(1.8); 
+}
+
+.form-container {
+  flex: 60%; /* para que el formulario ocupa el 60% del ancho */
+}
+
+.login-form.form-crear input{
+  background-color: #F3F8FF;
+}
+
+.login-form.form-crear input::placeholder {
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.7;
+  color: rgba(25, 35, 66, 0.5);
+  opacity: 1;
+}
+ /* pagina de verificar con digitos */
+.container-arrow-logo {
+  margin-bottom: 41px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: flex-start;
+  width: 855.1px;
+  box-sizing: border-box;
+}
+
+.arrow-left-line {
+  margin: 40.7px 0 164.7px 0;
+  display: flex;
+  width: 63.3px;
+  height: 61.6px;
+  box-sizing: border-box;
+}
+
+.arrow-left-line .vector {
+  width: 63.3px;
+  height: 61.6px;
+}
+
+.container-arrow-logo .vector-logo {
+  background: url('../images/logo.png');
+  width: 423.9px;
+  height: 267px;
+}
+ 
+.container-verificar {
+  background: #F3F6FF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 59.3px 76.8px 171.7px 76.8px;
+  width: 1440px;
+  box-sizing: border-box;
+}
+
+.verificar-numero-telefono {
+  margin: 0 0 7px 17.8px;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.5;
+  color: var(--black, #192342);
+}
+
+.ingrese-codigo-aqui {
+  margin: 0 33px 119px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Nunito';
+  font-weight: 400;
+  font-size: 24px;
+  color: #000000;
+}
+
+.container-campo-verificar {
+  margin: 0 0 170px 34px;
+  display: flex;
+  flex-direction: row;
+  width: 736px;
+  box-sizing: border-box;
+  justify-content: center;
+  gap: 50px;
+}
+
+.num-verificar {
+  border-radius: 8px;
+  border: 1px solid #D9D9D9;
+  background: #F3F8FF;
+  padding: 11px 0.2px 21px 0;
+  width: 150px;
+  height: 60px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.button-primary {
+  border-radius: 27.5px;
+  background: #567DF4;
+  position: relative;
+  margin-left: 21px;
+  display: flex;
+  padding: 18.3px 1.3px 12.7px 0;
+  width: 500px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.7;
+  color: var(--white, #FFFFFF);
+  justify-content: center; /* Centrar el texto horizontalmente */
+  align-items: center; /* Centrar los textos verticalmente */
+  text-align: center; /* Asegurar que el texto esté centrado */
+}
+
+.boton-submit.button-round{
+  border-radius: 30.5px;
+  background: #567DF4;
+  position: relative;
+  margin-left: 21px;
+  display: flex;
+  padding: 18.3px 1.3px 12.7px 0;
+  width: 500px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.7;
+  color: var(--white, #FFFFFF);
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking APP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">                                 <!--Fuentes-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton:wght@400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">                        <!--conectar con css-->
+</head>
+<body>
+    <div class="content" id="page1">
+        <div><img src="images/logo.png" alt="Logo de la aplicacion" class="logo"></div>
+        <div class="container-web">
+            <div class="parking-web">
+            PARKING WEB
+            </div>
+        </div>
+        
+        <div class="parking-web">
+            ULAGOS
+        </div>
+        <div><button class="page-button boton1" data-target="page2">Iniciar</button></div>
+        
+    </div>
+
+    <div class="content active" id="page2">
+        <p>Esta es la siguiente página.</p>
+        <button class="page-button" data-target="page1">Página Anterior</button>
+    </div>
+
+    <script src="scripts/scripts.js"></script>
+</body>
+</html>
