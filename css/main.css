@@ -253,7 +253,7 @@ button.boton-submit:hover {
   color: var(--black, #192342);
  }
 
-  /*todo lo que corresponde a la pagina de registrar cuenta*/
+                                                   /*todo lo que corresponde a la pagina de registrar cuenta*/
  .container-registrar .registrar-cuenta-texto {
   margin: 0 32.1px 8px 32.1px;
   display: block;
@@ -465,3 +465,228 @@ button.boton-submit:hover {
   align-items: center; 
   text-align: center; 
 }
+
+                                    /* página de en que te movilizas? */
+.container-movilizas .vector-arrow {
+  width: 63.3px;
+  height: 61.6px;
+}
+.container-movilizas .arrow-left-line {
+  margin-top: 0px;
+  display: flex;
+  width: 63.3px;
+  height: 61.6px;
+  box-sizing: border-box;
+}
+.container-movilizas .texto-movilizas {
+  margin-top: 7.3px;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.5;
+  color: var(--black, #192342);
+}
+.container-movilizas .vector-user {
+  margin: 1.3px 0 6px 0;
+  width: 60px;
+  height: 60px;
+}
+.container-movilizas .container-header {
+  margin-bottom: 30.7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 1231.2px;
+  box-sizing: border-box;
+}
+.container-movilizas .imagen-movilizas {
+  background: url('../images/imagenMovilizas.png');
+  margin: 0 0 83px 75.2px;
+  width: 720px;
+  height: 570px;
+}
+
+.container-movilizas .button-movilizas {
+  border-radius: 27.5px;
+  background: #567DF4;
+  position: relative;
+  margin-left: 74.2px;
+  display: flex;
+  padding: 13.1px 1.8px 12.9px 0;
+  width: 601px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.7;
+  color: var(--white, #FFFFFF);
+
+}
+.container-movilizas {
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 102px 142px 114px 66.8px;
+  width: 1440px;
+  box-sizing: border-box;
+}
+
+                                 /* página de Registre vehículo */
+.ellipse-1 {
+  margin: 0 0 75px 56.2px;
+  width: 360px;
+  height: 377px;
+}
+
+.auto-patente-1 {
+  background: url('../images/saber_caracteristicas_auto_patente_1.jpeg');
+  margin-top: 50px;
+  margin-left: 30px;
+  background-size: 100%;
+  transform: rotate(-4.958deg);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 524px;
+  height: 213.4px;
+}
+
+.container-registra-vehiculo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1230.2px;
+  height: fit-content;
+  box-sizing: border-box;
+}
+
+                                   /* página de Selecciona localidad */
+.Container-selecciona {
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100.8px 0 202px 0;
+  width: 1440px;
+  box-sizing: border-box;
+}
+
+.container-2-imagenes {
+  margin-bottom: 77px;
+  display: flex;
+  flex-direction: row;
+  width: 1457px;
+  box-sizing: border-box;
+}
+
+.osorno-1 {
+  background: url('../images/osorno_1.jpeg') 50% / cover no-repeat;
+  width: 737px;
+  height: 490px;
+}
+
+.tecnologico-2 {
+  background: url('../images/tecnologico_2.png');
+  width: 720px;
+  height: 490px;
+}
+
+.container-botones-selecciona {
+  margin: 0 128px 0 127px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 1185px;
+  box-sizing: border-box;
+}
+
+.container-b-1 {
+  border-radius: 27.5px;
+  background: #567DF4;
+  position: relative;
+  display: flex;
+  padding: 13px 0;
+  width: 467px;
+  height: 80px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.7;
+  color: var(--white, #FFFFFF);
+}
+
+.container-b-2 {
+  border-radius: 27.5px;
+  background: #567DF4;
+  position: relative;
+  display: flex;
+  padding: 13px 0;
+  width: 467px;
+  height: 80px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.7;
+  color: var(--white, #FFFFFF);
+}
+
+
+                                       /* página deregistrar patente */
+ .registro-patente {
+  display: flex;
+  flex-direction: column; /* Coloca los elementos uno debajo del otro */
+  margin-bottom: 15px; /* Añade espacio entre cada grupo de formulario */
+}
+
+.registro-patente label {
+  font-size: 1.2em; /* Ajusta el tamaño de la fuente de las etiquetas */
+  margin-bottom: 5px; /* Añade un pequeño espacio debajo de las etiquetas */
+  margin: 0 249.2px 15.3px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Lato';
+  font-weight: 600;
+  font-size: 32px;
+  color: var(--black, #192342);
+}
+
+ .registro-patente input {
+  padding: 10px; /* Ajusta el relleno dentro del campo de entrada */
+  font-size: 1em; /* Ajusta el tamaño de la fuente de los inputs */
+  border: 1px solid #ccc; /* Añade un borde a los inputs */
+  border-radius: 4px; /* Añade esquinas redondeadas a los inputs */
+}
+
+.registro-patente .campo-modelo{
+  height: 200px;
+
+}
+
+.boton-submit.boton-ingresar-patente{
+    overflow-wrap: break-word;
+    font-family: 'Lato';
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.7;
+    color: var(--white, #FFFFFF);
+    border-radius: 27.5px;
+    background: #567DF4;
+    position: relative;
+    display: flex;
+    padding: 14px 0 13px 1px;
+    width: 357px;
+    box-sizing: border-box;
+  
+  }
+
+  

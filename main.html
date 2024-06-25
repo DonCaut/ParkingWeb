@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/main.css">                        <!--conectar con css-->
 </head>
 <body>
-    <div class="content active" id="page1">
+    <div class="content" id="page1">
         <div><img src="images/logo.png" alt="Logo de la aplicacion" class="logo"></div>
         <div class="container-web">
             <div class="parking-web">
@@ -150,7 +150,113 @@
   </div>
 
 
+  <div class="content" id="pageMovilizas">                                <!--Página de en que te movilizas-->                                 
+    <div class="container-movilizas">
+      <div class="container-header">
+        <div class="arrow-left-line">
+          <img class="vector-arrow" src="../vectors/vector_88_x2.svg" />
+        </div>
+        <div class="texto-movilizas">
+        ¿En qué te movilizas hoy?
+        </div>
+        <img class="vector-user" src="../vectors/vector_37_x2.svg" />
+      </div>
+      <div class="imagen-movilizas">
+      </div>
+      <div>
+        <button class="page-button button-movilizas" data-target="page1">Seleccione su vehículo</button>
+      </div>
+    </div>
+  </div>
 
+
+  <div class="content" id="pageRegistraVehiculo">               <!--Página de Registra vehículo-->  
+    <div class="container-movilizas">
+      <div class="container-registra-vehiculo">
+      <div class="container-header">
+        <div class="arrow-left-line">
+          <img class="vector-arrow" src="../vectors/vector_88_x2.svg" />
+        </div>
+        <div class="texto-movilizas">
+        Registre su vehículo
+        </div>
+        <img class="vector-user" src="../vectors/vector_37_x2.svg" />
+      </div>
+      <img class="ellipse-1" src="../vectors/ellipse_1_x2.svg" />
+      <div class="auto-patente-1"></div>
+      <button class="page-button" data-target="page1">Agregar vehículo nuevo</button>
+      <button class="page-button" data-target="page1">Vehículos guardados</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="content" id="paginaSeleccionaLocalizacion">                              <!--Página de Seleccionar localizacion-->  
+    <div class="container-movilizas">
+      <div class="Container-selecciona">
+      <div class="container-header">
+        <div class="arrow-left-line">
+          <img class="vector-arrow" src="../vectors/vector_88_x2.svg" />
+        </div>
+        <div class="texto-movilizas">
+        Selecciona la localidad a reservar
+        </div>
+        <img class="vector-user" src="../vectors/vector_37_x2.svg" />
+      </div>
+      <div class="container-2-imagenes">
+        <div class="osorno-1">
+        </div>
+        <div class="tecnologico-2">
+        </div>
+      </div>
+      <div class="container-botones-selecciona">
+        <div>
+          <button class="page-button container-b-1" data-target="page1">Chuyaca</button>
+        </div>
+        <div>
+          <button class="page-button container-b-2" data-target="page1">Meyer</button>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </div>
+
+
+  <div class="content active" id="paginaIngresarPatente">                                 <!--Página de Ingresar patente-->  
+    <div class="container-movilizas">
+      <div class="Container-selecciona">
+      <div class="container-header">
+        <div class="arrow-left-line">
+          <img class="vector-arrow" src="../vectors/vector_88_x2.svg" />
+        </div>
+        <div class="texto-movilizas">
+        Ingrese la patente y modelo de su vehículo
+        </div>
+        <img class="vector-user" src="../vectors/vector_37_x2.svg" />
+      </div>
+      <div class="form-container">
+        <form class="login-form form-crear"  onsubmit="">
+       <div class="input-container-registro">
+         <div class="registro-patente">
+           <label for="patente">Patente</label>
+           <input class="caja-input"  type="text" id="patente-registro" name="patente">
+         </div>
+           <div class="registro-patente ">
+             <label for="modelo">Modelo</label>
+             <input class="caja-input campo-modelo"  type="text" id="modelo-registro" name="modelo">
+           </div>
+         </div>
+         <div >
+           <button class="boton-submit boton-ingresar-patente " type="submit">Continuar</button>
+         </div>
+        </form>
+     </div>
+      
+    </div>
+    
+    </div>
+  </div>
 
 
   <div class="content" id="pageTestLogin">
