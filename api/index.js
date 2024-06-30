@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 app.post('/login', async (req, res) => {
     const { phone, password } = req.body;
     try {
-        const result = await pool.query('SELECT * FROM usuarios WHERE telefono = $1 AND password = $2', [phone, password]);
+        const result = await pool.query('SELECT * FROM usuario WHERE telefono = $1 AND contrasena = $2', [phone, password]);
         if (result.rows.length > 0) {
             res.json({ success: true });
         } else {
@@ -45,11 +45,11 @@ app.post('/login', async (req, res) => {
 
 // Ruta para registrar usuario
 app.post('/register', async (req, res) => {
-    const { nombre, phone, password, tipo } = req.body;
+    const { nombre, phone, password, tipo, correo} = req.body;
     try {
         await pool.query(
-            'INSERT INTO usuarios (nombre,telefono,tipo,password) VALUES ($1, $2, $3, $4)',
-            [nombre, phone, tipo, password]
+            'INSERT INTO usuario (nombre,telefono,tipo,contrasena,correo) VALUES ($1, $2, $3, $4, $5)',
+            [nombre, phone, tipo, password, correo]
         );
         res.json({ success: true });
     } catch (error) {
@@ -61,9 +61,9 @@ app.post('/register', async (req, res) => {
 
 
 // para ver la tabla usaurios
-app.get('/usuarios', async (req, res) => {
+app.get('/usuario', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM usuarios');
+        const result = await pool.query('SELECT * FROM usuario');
         res.json(result.rows);
     } catch (error) {
         console.error('Error al obtener usuarios:', error);

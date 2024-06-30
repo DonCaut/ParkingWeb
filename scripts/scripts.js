@@ -59,7 +59,8 @@ document.querySelectorAll('.page-button').forEach(button => {
 // Función para manejar el envío del formulario
 function handleRegister(event) {
     event.preventDefault();  
-
+     
+    const correo = document.getElementById('correo-registro').value;
     const tipo = sessionStorage.getItem('tipoCuenta');
     const nombre = document.getElementById('nombre-registro').value;
     const phone = document.getElementById('phone-registro').value;
@@ -70,7 +71,7 @@ function handleRegister(event) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ nombre, phone, password, tipo })
+        body: JSON.stringify({ nombre, phone, password, tipo, correo})
     })
     .then(response => response.json())
     .then(result => {
