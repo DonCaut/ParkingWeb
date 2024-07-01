@@ -88,7 +88,26 @@ function handleRegister(event) {
     });
 }
 
+//FUNCION DE MODAL DEL BOTON CAMPUS CHUYACA
+// Obtener el modal y el botón de cerrar
+var modal = document.getElementById("myModal");
+var closeButton = modal.querySelector(".close-chuyaca");
 
+// Mostrar el modal al hacer clic en el botón correspondiente
+document.getElementById("btnChuyaca").addEventListener("click", function() {
+    modal.style.display = "block";
+});
 
+// Cerrar el modal al hacer clic en el botón de cerrar
+closeButton.onclick = function() {
+    modal.style.display = "none";
+};
+
+// Cerrar el modal al hacer clic fuera del contenido del modal
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+};
 
 

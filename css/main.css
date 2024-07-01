@@ -689,4 +689,54 @@ button.boton-submit:hover {
   
   }
 
-  
+                                              /* Estilos para el modal de botno chuyaca*/
+.modal-chuyaca {
+  display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo para permanecer sobre el contenido */
+    z-index: 1; /* Se muestra sobre el contenido */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Habilita el desplazamiento si es necesario */
+    background-color: rgba(0,0,0,0.4); /* Fondo oscuro con opacidad */
+}
+
+.modal-content-chuyaca {
+  background-color: #fff; /* Fondo blanco */
+  width: 60%; /* Ancho del modal */
+  max-width: 600px; /* Ancho máximo del modal */
+  margin: 15% auto; /* Centrado vertical y horizontal */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Sombra */
+  position: relative; /* Relativo para posicionar el botón de cerrar */
+}
+
+.close-chuyaca {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Estilos para los botones dentro del modal */
+.modal-buttons-chuyaca {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre los botones */
+}
+
+.modal-buttons-chuyaca button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Color de fondo del botón */
+  color: #fff; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-buttons-chuyaca button:hover {
+  background-color: #0056b3; /* Color de fondo del botón al pasar el mouse */
+}

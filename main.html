@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/main.css">                        <!--conectar con css-->
 </head>
 <body>
-    <div class="content active" id="page1">
+    <div class="content" id="page1">
         <div><img src="images/logo.png" alt="Logo de la aplicacion" class="logo"></div>
         <div class="container-web">
             <div class="parking-web">
@@ -195,7 +195,7 @@
   </div>
 
 
-  <div class="content" id="paginaSeleccionaLocalizacion">                              <!--Página de Seleccionar localizacion-->  
+  <div class="content active" id="paginaSeleccionaLocalizacion">                              <!--Página de Seleccionar localizacion-->  
     <div class="container-movilizas">
       <div class="Container-selecciona">
       <div class="container-header">
@@ -215,7 +215,7 @@
       </div>
       <div class="container-botones-selecciona">
         <div>
-          <button class="page-button container-b-1" data-target="page1">Chuyaca</button>
+          <button class="container-b-1"  id="btnChuyaca">Chuyaca</button>
         </div>
         <div>
           <button class="page-button container-b-2" data-target="page1">Meyer</button>
@@ -226,6 +226,17 @@
     </div>
   </div>
 
+  <div id="myModal" class="modal-chuyaca">
+    <div class="modal-content-chuyaca">
+        <span class="close-chuyaca">&times;</span>
+        <div class="modal-buttons-chuyaca">
+            <button>Entrada C</button>
+            <button>Gym</button>
+            <button>Aulas Virtuales</button>
+            <button>Casino</button>
+        </div>
+    </div>
+</div>
 
   <div class="content" id="paginaIngresarPatente">                                 <!--Página de Ingresar patente-->  
     <div class="container-movilizas">
