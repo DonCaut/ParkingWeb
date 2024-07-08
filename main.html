@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/main.css">                        <!--conectar con css-->
 </head>
 <body>
-    <div class="content" id="page1">
+    <div class="content active" id="page1">
         <div><img src="images/logo.png" alt="Logo de la aplicacion" class="logo"></div>
         <div class="container-web">
             <div class="parking-web">
@@ -41,8 +41,8 @@
       <form class="login-form"  onsubmit="handleLogin(event)">
         <div class="input-container">
             <div class="form-group">
-              <label for="phone">Número de teléfono</label>
-              <input class="caja-input"  type="tel" id="phone" name="phone" required placeholder="Introduce tu número de teléfono">
+              <label for="correo">Correo electronico</label>
+              <input class="caja-input"  type="text" id="correo" name="correo" required placeholder="Introduce tu correo">
             </div>
             <div class="form-group">
               <label for="password">Contraseña</label>
@@ -150,7 +150,8 @@
       </div>
       <div class="submit-container">
         <button class="boton-submit button-round" type="submit">Enviar SMS</button>
-      </div>                                
+      </div>
+    </form>                                
   </div>
 
 
@@ -168,7 +169,7 @@
       <div class="imagen-movilizas">
       </div>
       <div>
-        <button class="page-button button-movilizas" data-target="page1">Seleccione su vehículo</button>
+        <button class="page-button button-movilizas" data-target="pageRegistraVehiculo">Seleccione su vehículo</button>
       </div>
     </div>
   </div>
@@ -188,14 +189,14 @@
       </div>
       <img class="ellipse-1" src="../vectors/ellipse_1_x2.svg" />
       <div class="auto-patente-1"></div>
-      <button class="page-button" data-target="page1">Agregar vehículo nuevo</button>
-      <button class="page-button" data-target="page1">Vehículos guardados</button>
+      <button class="page-button" data-target="paginaIngresarPatente">Agregar vehículo nuevo</button>
+      <button id="continue-btn"  onclick="cargarListaMatricula()" >Mis vehículos</button>
       </div>
     </div>
   </div>
 
 
-  <div class="content active" id="paginaSeleccionaLocalizacion">                              <!--Página de Seleccionar localizacion-->  
+  <div class="content" id="paginaSeleccionaLocalizacion">                              <!--Página de Seleccionar localizacion-->  
     <div class="container-movilizas">
       <div class="Container-selecciona">
       <div class="container-header">
@@ -218,7 +219,7 @@
           <button class="container-b-1"  id="btnChuyaca">Chuyaca</button>
         </div>
         <div>
-          <button class="page-button container-b-2" data-target="page1">Meyer</button>
+          <button class="container-b-2" onclick="handleMeyerButtonClick(event)">Meyer</button>
         </div>
       </div>
     </div>
@@ -230,13 +231,44 @@
     <div class="modal-content-chuyaca">
         <span class="close-chuyaca">&times;</span>
         <div class="modal-buttons-chuyaca">
-            <button>Entrada C</button>
-            <button>Gym</button>
-            <button>Aulas Virtuales</button>
-            <button>Casino</button>
+            <button id="entradaC-btn" data-lugar="1">Entrada C</button>
+            <button id="gym-btn" data-lugar="2">Gym</button>
+            <button id="aulasVirtuales-btn" data-lugar="3">Aulas Virtuales</button>
+            <button id="casino-btn" data-lugar="4">Casino</button>
         </div>
     </div>
 </div>
+
+<!-- Página para seleccionar fecha y hora -->
+<div class="content" id="paginaSeleccionaFechaHora">
+  <h2>Selecciona tu fecha y hora:</h2>
+  <div>
+      <label for="SelectFecha">Fecha:</label>
+      <input type="date" id="SelectFecha" name="fecha" min="" required>
+  </div>
+  <div>
+      <label for="SelectHora">Hora inicial:</label>
+      <select id="SelectHora" name="hora">
+          <!-- Aquí puedes generar opciones de hora -->
+      </select>
+  </div>
+  <div>
+      <label for="rangeHoras">Horas adicionales:</label>
+      <input type="range" id="rangeHoras" name="rangeHoras" min="0" max="5" step="1" value="0">
+      <output id="outputRange">0 horas adicionales</output>
+  </div>
+  <button onclick="handleReservar()">Continuar</button>
+</div>
+
+
+
+
+<!-- Página para ver los botones que representan los estacionamientos -->
+<div class="content" id="paginaSeleccionaBotones">                 
+  <h2>Selecciona una ubicación:</h2>
+  <div id="botones-lugares"></div>
+</div>
+
 
   <div class="content" id="paginaIngresarPatente">                                 <!--Página de Ingresar patente-->  
     <div class="container-movilizas">
@@ -251,27 +283,67 @@
         <img class="vector-user" src="../vectors/vector_37_x2.svg" />
       </div>
       <div class="form-container">
-        <form class="login-form form-crear"  onsubmit="">
-       <div class="input-container-registro">
-         <div class="registro-patente">
-           <label for="patente">Patente</label>
-           <input class="caja-input"  type="text" id="patente-registro" name="patente">
-         </div>
-           <div class="registro-patente ">
-             <label for="modelo">Modelo</label>
-             <input class="caja-input campo-modelo"  type="text" id="modelo-registro" name="modelo">
-           </div>
-         </div>
-         <div >
-           <button class="boton-submit boton-ingresar-patente " type="submit">Continuar</button>
-         </div>
+        <form class="login-form form-crear" id="formularioIngresoPatente" onsubmit="handleVehicleRegistration(event)">
+            <div class="input-container-registro">
+                <div class="registro-patente">
+                    <label for="patente">Patente</label>
+                    <input class="caja-input" type="text" id="patente-registro" name="patente" required>
+                </div>
+                <div class="registro-patente ">
+                    <label for="modelo">Modelo</label>
+                    <input class="caja-input campo-modelo" type="text" id="modelo-registro" name="modelo" required>
+                </div>
+                <div class="registro-patente">
+                    <label for="tipo">Tipo de Vehículo</label>
+                    <select class="caja-input" id="tipo-registro" name="tipoVehiculo" required>
+                        <option value="1">Automovil</option>
+                        <option value="2">Camion</option>
+                        <option value="3">Moto</option>
+                        <option value="4">Camioneta</option>
+                        <option value="5">Furgon</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button class="boton-submit boton-ingresar-patente" type="submit">Continuar</button>
+            </div>
         </form>
-     </div>
+    </div>
       
     </div>
     
     </div>
   </div>
+
+  <div class="content" id="paginaMatriculaExitosa">                      <!-- Página matricula exito -->
+    <p>Ha registrado su matricula con éxito</p>
+    <button id="continue-btn"  onclick="cargarListaMatricula()">Continuar</button>
+  </div>
+
+                                                                  
+<!-- Página dinámica para seleccionar matrícula -->
+<div class="content" id="listaMatricula">
+  <h2>Selecciona una matrícula</h2>
+  <button class="page-button" id="registrarMatricula-btn" >Registrar Matrícula</button>
+  <div id="vehicle-selection">
+      <!-- Aquí se generará dinámicamente el formulario -->
+  </div>
+  <button id="continue-list-btn" >Continuar</button>
+</div>
+
+<!-- PAGINA 1 del guardia donde tiene las opciones para ir a editar o reservar -->
+<div class="content" id="paginaGuardia1">
+  <p>Bienvenido Guardia/Administrador</p>
+  <p>¿Qué harás hoy?</p>
+  <button class="page-button" data-target="pageMovilizas"> Reservar</button>
+  <button class="page-button" data-target="page1"> Editar</button>
+</div>
+
+
+<div class="content" id="paginaReservaExitosa">
+  <p>Ha ingresado su reserva con éxito</p>
+  <button class="" >Continuar</button>
+</div>
 
 
   <div class="content" id="pageTestLogin">
@@ -289,6 +361,27 @@
     <p>Esta es la siguiente página.</p>
     <button class="page-button" data-target="page1">Página Anterior</button>
   </div>
+
+  <!-- Página dinámica de mensaje de registro   temporal -->
+<div class="content" id="paginaMensajeRegistro">
+  <div class="container-movilizas">
+      <div class="Container-selecciona">
+          <div class="container-header">
+              <div class="arrow-left-line">
+                  <img class="vector-arrow" src="../vectors/vector_88_x2.svg" />
+              </div>
+              <div class="texto-movilizas">
+                  Registro exitoso
+              </div>
+              <img class="vector-user" src="../vectors/vector_37_x2.svg" />
+          </div>
+          <div class="form-container">
+              <p>Se ha registrado correctamente la patente: <span id="patente-registrada"></span></p>
+          </div>
+      </div>
+  </div>
+</div>
+
 
     <script src="scripts/scripts.js"></script>
 </body>
