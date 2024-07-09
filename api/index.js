@@ -235,6 +235,57 @@ app.get('/verificarSesion', (req, res) => {
     }
 });
 //--------------------------------
+//--------------------------OBTENER LA RESERVA DEL USUARIO ACTIVO O LOGUEADO
+app.get('/obtenerMiReservaActiva', (req, res) => {
+    const correoUsuario = req.session.user.correo;
+
+    const query = `
+        SELECT 
+            o.ID_Estacionamiento,
+            o.ID_Vehiculo,
+            o.Fecha_Entrada,
+            o.Fecha_Salida,
+            o.Estado,
+            r.fecha_reserva,
+            u.Nombre AS Usuario_Nombre,
+            u.Correo AS Usuario_Correo,
+            u.Tipo AS Usuario_Tipo,
+            cs.Nombre AS Campus_Nombre,
+            v.Descripcion AS Vehiculo_Descripcion,
+            v.Año AS Vehiculo_Año,
+            tv.Nombre AS Tipo_Vehiculo,
+            le.Descripcion AS Lugar_Estacionamiento_Descripcion
+        FROM 
+            Ocupa o
+        JOIN 
+            Reserva r ON o.ID_Estacionamiento = r.ID_Estacionamiento
+        JOIN 
+            Usuario u ON r.ID_Usuario = u.Correo
+        JOIN 
+            Estacionamiento e ON r.ID_Estacionamiento = e.ID_Estacionamiento
+        JOIN 
+            Campus_Sede cs ON e.ID_Campus = cs.ID_Campus
+        JOIN 
+            Vehiculo v ON o.ID_Vehiculo = v.Patente
+        JOIN 
+            Tipo_Vehiculo tv ON v.ID_Tipo_V = tv.ID_Tipo_V
+        JOIN 
+            Lugar_Estacionamiento le ON e.ID_Lugar = le.ID_Lugar
+        WHERE 
+            o.Estado = true
+            AND u.Correo = $1;
+    `;
+    
+    pool.query(query, [correoUsuario], (error, result) => {
+        if (error) {
+            console.error('Error al obtener la reserva activa del usuario:', error);
+            res.status(500).json({ error: 'Error al obtener la reserva activa del usuario' });
+        } else {
+            res.status(200).json(result.rows);
+        }
+    });
+});
+
 
 //-------TODO LO QUE CORRESPONDE A CONSULTAS DE ADMIN Y GUARDIAS-------------------------------------------
 // Ruta para obtener reservas activas-------------------------------
@@ -316,6 +367,262 @@ app.put('/actualizarEstadoReserva', (req, res) => {
         }
     });
 });
+//------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+app.get('/obtenerTodasLasReservas', (req, res) => {
+    const query = `
+        SELECT 
+            o.ID_Estacionamiento,
+            o.ID_Vehiculo,
+            o.Fecha_Entrada,
+            o.Fecha_Salida,
+            o.Estado,
+            r.fecha_reserva,
+            u.Nombre AS Usuario_Nombre,
+            u.Correo AS Usuario_Correo,
+            u.Tipo AS Usuario_Tipo,
+            cs.Nombre AS Campus_Nombre,
+            v.Descripcion AS Vehiculo_Descripcion,
+            v.Año AS Vehiculo_Año,
+            tv.Nombre AS Tipo_Vehiculo,
+            le.Descripcion AS Lugar_Estacionamiento_Descripcion
+        FROM 
+            Ocupa o
+        JOIN 
+            Reserva r ON o.ID_Estacionamiento = r.ID_Estacionamiento
+        JOIN 
+            Usuario u ON r.ID_Usuario = u.Correo
+        JOIN 
+            Estacionamiento e ON r.ID_Estacionamiento = e.ID_Estacionamiento
+        JOIN 
+            Campus_Sede cs ON e.ID_Campus = cs.ID_Campus
+        JOIN 
+            Vehiculo v ON o.ID_Vehiculo = v.Patente
+        JOIN 
+            Tipo_Vehiculo tv ON v.ID_Tipo_V = tv.ID_Tipo_V
+        JOIN 
+            Lugar_Estacionamiento le ON e.ID_Lugar = le.ID_Lugar
+    `;
+
+    pool.query(query, (error, result) => {
+        if (error) {
+            console.error('Error al obtener todas las reservas:', error);
+            res.status(500).json({ error: 'Error al obtener las reservas' });
+        } else {
+            res.status(200).json(result.rows);
+        }
+    });
+});
+//----------------------------------------------------------------
+//PATH PARA OBTENER LAS RESERVAS ACTIVAS EN CHUYACA
+app.get('/reservasChuyaca', (req, res) => {
+    const query = `
+        SELECT 
+            o.ID_Estacionamiento,
+            o.ID_Vehiculo,
+            o.Fecha_Entrada,
+            o.Fecha_Salida,
+            o.Estado,
+            r.fecha_reserva,
+            u.Nombre AS Usuario_Nombre,
+            u.Correo AS Usuario_Correo,
+            u.Tipo AS Usuario_Tipo,
+            cs.Nombre AS Campus_Nombre,
+            v.Descripcion AS Vehiculo_Descripcion,
+            v.Año AS Vehiculo_Año,
+            tv.Nombre AS Tipo_Vehiculo,
+            le.Descripcion AS Lugar_Estacionamiento_Descripcion
+        FROM 
+            Ocupa o
+        JOIN 
+            Reserva r ON o.ID_Estacionamiento = r.ID_Estacionamiento
+        JOIN 
+            Usuario u ON r.ID_Usuario = u.Correo
+        JOIN 
+            Estacionamiento e ON r.ID_Estacionamiento = e.ID_Estacionamiento
+        JOIN 
+            Campus_Sede cs ON e.ID_Campus = cs.ID_Campus
+        JOIN 
+            Vehiculo v ON o.ID_Vehiculo = v.Patente
+        JOIN 
+            Tipo_Vehiculo tv ON v.ID_Tipo_V = tv.ID_Tipo_V
+        JOIN 
+            Lugar_Estacionamiento le ON e.ID_Lugar = le.ID_Lugar
+        WHERE 
+            cs.Nombre = 'Chuyaca' AND
+            o.Estado = true;  -- Filtrar por Chuyaca y reservas activas
+    `;
+
+    pool.query(query, (error, result) => {
+        if (error) {
+            console.error('Error al obtener reservas de Chuyaca:', error);
+            res.status(500).json({ error: 'Error al obtener las reservas de Chuyaca' });
+        } else {
+            res.status(200).json(result.rows);
+        }
+    });
+});
+//----------------------------------------------------------------
+//PATH PARA OBTENER LAS RESERVAS ACTIVAS EN Meyer
+app.get('/reservasMeyer', (req, res) => {
+    const query = `
+        SELECT 
+            o.ID_Estacionamiento,
+            o.ID_Vehiculo,
+            o.Fecha_Entrada,
+            o.Fecha_Salida,
+            o.Estado,
+            r.fecha_reserva,
+            u.Nombre AS Usuario_Nombre,
+            u.Correo AS Usuario_Correo,
+            u.Tipo AS Usuario_Tipo,
+            cs.Nombre AS Campus_Nombre,
+            v.Descripcion AS Vehiculo_Descripcion,
+            v.Año AS Vehiculo_Año,
+            tv.Nombre AS Tipo_Vehiculo,
+            le.Descripcion AS Lugar_Estacionamiento_Descripcion
+        FROM 
+            Ocupa o
+        JOIN 
+            Reserva r ON o.ID_Estacionamiento = r.ID_Estacionamiento
+        JOIN 
+            Usuario u ON r.ID_Usuario = u.Correo
+        JOIN 
+            Estacionamiento e ON r.ID_Estacionamiento = e.ID_Estacionamiento
+        JOIN 
+            Campus_Sede cs ON e.ID_Campus = cs.ID_Campus
+        JOIN 
+            Vehiculo v ON o.ID_Vehiculo = v.Patente
+        JOIN 
+            Tipo_Vehiculo tv ON v.ID_Tipo_V = tv.ID_Tipo_V
+        JOIN 
+            Lugar_Estacionamiento le ON e.ID_Lugar = le.ID_Lugar
+        WHERE 
+            cs.Nombre = 'Meyer' AND
+            o.Estado = true;  -- Filtrar por Meyer y reservas activas
+    `;
+
+    pool.query(query, (error, result) => {
+        if (error) {
+            console.error('Error al obtener reservas de Meyer:', error);
+            res.status(500).json({ error: 'Error al obtener las reservas de Meyer' });
+        } else {
+            res.status(200).json(result.rows);
+        }
+    });
+});
+//----------------------------------------------------------------
+
+//---------PARA ACTUALIZAR LAS RESERVAS ACTIVAS EN CHUYACA-------------------------------------------------
+app.put('/eliminarReservasChuyaca', (req, res) => {
+    const { id_vehiculo, fecha_entrada, id_estacionamiento } = req.body;
+
+    // Consulta SQL para actualizar el estado en la tabla Ocupa para Chuyaca
+    const query = `
+        UPDATE Ocupa
+        SET Estado = false
+        FROM Estacionamiento AS e
+        JOIN Campus_Sede AS cs ON e.ID_Campus = cs.ID_Campus
+        WHERE Ocupa.ID_Vehiculo = $1
+        AND Ocupa.Fecha_Entrada = $2
+        AND Ocupa.ID_Estacionamiento = $3
+        AND Ocupa.Estado = true
+        AND cs.Nombre = 'Chuyaca'
+        AND Ocupa.ID_Estacionamiento = e.ID_Estacionamiento
+    `;
+    const values = [id_vehiculo, fecha_entrada, id_estacionamiento];
+
+    pool.query(query, values, (error, result) => {
+        if (error) {
+            console.error('Error al eliminar las reservas en Chuyaca:', error);
+            res.status(500).json({ error: 'Error al eliminar las reservas en Chuyaca' });
+        } else {
+            res.status(200).json({ message: 'Reservas en Chuyaca eliminadas exitosamente' });
+        }
+    });
+});
+//------------------------------------------------------
+app.put('/eliminarReservasMeyer', (req, res) => {
+    const { id_vehiculo, fecha_entrada, id_estacionamiento } = req.body;
+
+    // Consulta SQL para actualizar el estado en la tabla Ocupa para Chuyaca
+    const query = `
+        UPDATE Ocupa
+        SET Estado = false
+        FROM Estacionamiento AS e
+        JOIN Campus_Sede AS cs ON e.ID_Campus = cs.ID_Campus
+        WHERE Ocupa.ID_Vehiculo = $1
+        AND Ocupa.Fecha_Entrada = $2
+        AND Ocupa.ID_Estacionamiento = $3
+        AND Ocupa.Estado = true
+        AND cs.Nombre = 'Meyer'
+        AND Ocupa.ID_Estacionamiento = e.ID_Estacionamiento
+    `;
+    const values = [id_vehiculo, fecha_entrada, id_estacionamiento];
+
+    pool.query(query, values, (error, result) => {
+        if (error) {
+            console.error('Error al eliminar las reservas en Meyer:', error);
+            res.status(500).json({ error: 'Error al eliminar las reservas en Meyer' });
+        } else {
+            res.status(200).json({ message: 'Reservas en Meyer eliminadas exitosamente' });
+        }
+    });
+});
+//------------------------------------------------------
+//---------------CANCELAR LA RESERVA PERSONAL MIA DE USUARIO
+app.put('/cancelarMiReservaPersonal', (req, res) => {
+    const correoUsuario = req.session.user.correo;
+
+    // Consulta para cancelar la reserva activa del usuario
+    const cancelarReservaQuery = `
+        UPDATE Ocupa AS o
+        SET Estado = false
+        WHERE o.ID_Vehiculo IN (
+            SELECT v.Patente
+            FROM Vehiculo AS v
+            JOIN Registra AS r ON v.Patente = r.ID_Vehiculo
+            WHERE r.ID_Usuario = $1
+        )
+        AND o.Estado = true
+    `;
+
+    // Ejecutar la consulta para cancelar la reserva
+    pool.query(cancelarReservaQuery, [correoUsuario], (error, result) => {
+        if (error) {
+            console.error('Error al cancelar la reserva del usuario:', error);
+            res.status(500).json({ error: 'Error al cancelar la reserva' });
+        } else {
+            // Determinar a dónde redirigir después de cancelar la reserva
+            const tipoUsuarioQuery = `
+                SELECT Tipo
+                FROM Usuario
+                WHERE Correo = $1
+            `;
+
+            // Consultar el tipo de usuario para decidir la página de redirección
+            pool.query(tipoUsuarioQuery, [correoUsuario], (error, result) => {
+                if (error) {
+                    console.error('Error al obtener el tipo de usuario:', error);
+                    res.status(500).json({ error: 'Error al obtener el tipo de usuario' });
+                } else {
+                    const tipoUsuario = result.rows[0].tipo;
+                    let redirectPage = tipoUsuario === 'Administrador' || tipoUsuario === 'Guardia' ?
+                        'paginaGuardia1' : 'pageMovilizas';
+                    
+                    res.status(200).json({ tipoUsuario, redirectPage });
+                }
+            });
+        }
+    });
+});
+
+
+
+
+
+//-----------------------------------------------------------------------------
+
 
 
 // para ver la tabla usaurios

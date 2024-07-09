@@ -249,7 +249,7 @@
   <div>
       <label for="SelectHora">Hora inicial:</label>
       <select id="SelectHora" name="hora">
-          <!-- Aquí puedes generar opciones de hora -->
+          <!-- Aacá genera opciones de hora -->
       </select>
   </div>
   <div>
@@ -331,6 +331,28 @@
   <button id="continue-list-btn" >Continuar</button>
 </div>
 
+
+<div class="content" id="pageMiReservaActiva">                     <!--Página PARA insertar datos de RESERVA ACTIVA-->     
+  <div class="container-verificar">
+    <div class="container-arrow-logo">
+     <div class="arrow-left-line">
+      <img class="vector" src="vectors/vector_26_x2.svg" />
+     </div>
+     <div class="vector-logo">
+     </div>
+    </div> 
+    <div class="resultados-mi-reserva-activa">
+     <!--Acá se insertan datos de RESERVA ACTIVA-->
+    </div>
+    <div>
+      <button onclick="cancelarMiReservaPersonal()">Cancelar Reserva</button>
+    </div>
+  </div>        
+</div>
+
+
+
+
 <!-- PAGINA 1 del guardia donde tiene las opciones para ir a editar o reservar -->
 <div class="content" id="paginaGuardia1">
   <p>Bienvenido Guardia/Administrador</p>
@@ -344,7 +366,7 @@
   <header class="header-sesion">
     <div class="header-sesion-header">
       <div class="header-left-sesion">
-          <button class="boton-sesion">&#9664;</button>
+          <button class="boton-sesion" onclick="navigateTo('paginaGuardia1')">&#9664;</button>
       </div>
       <div class="header-center-sesion">
           <h1>Historial de reservas</h1>
@@ -357,9 +379,9 @@
           </div>
           <div class="botones-orden-sesion">
               <button class="boton-sesion" onclick="mostrarActivos()">Activos</button>
-              <button class="boton-sesion">Todas las reservas</button>
-              <button class="boton-sesion">Chuyaca</button>
-              <button class="boton-sesion">Meyer</button>
+              <button class="boton-sesion" onclick="mostrarTodasLasReservas()">Todas las reservas</button>
+              <button class="boton-sesion" onclick="renderizarReservasChuyaca()">Chuyaca</button>
+              <button class="boton-sesion" onclick="renderizarReservasMeyer()">Meyer</button>
           </div>
       </div>
   </header>
@@ -373,7 +395,7 @@
   <header class="header-sesion">
     <div class="header-sesion-header">
       <div class="header-left-sesion">
-          <button class="boton-sesion">&#9664;</button>
+          <button class="boton-sesion" onclick="navigateTo('paginaGuardiaSesiones')">&#9664;</button>
       </div>
       <div class="header-center-sesion">
           <h1>Datos de reserva</h1>

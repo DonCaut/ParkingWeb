@@ -5,6 +5,12 @@ function navigateTo(pageId) {
 
     // Mostrar el contenido de la página
     document.getElementById(pageId).classList.add('active');
+
+    // Llamar a cargarReservaActiva si se navega a pageMovilizas
+    if (pageId === 'pageMovilizas') {
+        cargarReservaActiva();
+    }    
+
 }
 
 // event listeners de los botones de navegación
@@ -632,6 +638,237 @@ function renderizarReservas(reservas) {
     resultadosDiv.appendChild(table);
 }
 
+//boton 2 para mmostrar toads las FUNCIONEs
+function mostrarTodasLasReservas() {
+    fetch('/obtenerTodasLasReservas')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener las reservas');
+            }
+            return response.json();
+        })
+        .then(reservas => {
+            const resultadosDiv = document.querySelector('.resultados-sesion');
+            resultadosDiv.innerHTML = ''; // Limpiar resultados anteriores
+
+            const table = document.createElement('table');
+            table.classList.add('reservas-table');
+
+            const headerRow = document.createElement('tr');
+            const headers = ['Código', 'Patente', 'Hora', 'Fecha', 'Nombre', 'Campus', 'Acciones'];
+            headers.forEach(headerText => {
+                const header = document.createElement('th');
+                header.textContent = headerText;
+                headerRow.appendChild(header);
+            });
+            table.appendChild(headerRow);
+
+            reservas.forEach(reserva => {
+                const row = document.createElement('tr');
+
+                const codigoCell = document.createElement('td');
+                codigoCell.textContent = reserva.id_estacionamiento;
+                row.appendChild(codigoCell);
+
+                const patenteCell = document.createElement('td');
+                patenteCell.textContent = reserva.id_vehiculo;
+                row.appendChild(patenteCell);
+
+                const horaCell = document.createElement('td');
+                horaCell.textContent = `${reserva.fecha_entrada} / ${reserva.fecha_salida}`;
+                row.appendChild(horaCell);
+
+                const fechaCell = document.createElement('td');
+                fechaCell.textContent = formatFecha(reserva.fecha_reserva);
+                row.appendChild(fechaCell);
+
+                const nombreCell = document.createElement('td');
+                nombreCell.textContent = reserva.usuario_nombre;
+                row.appendChild(nombreCell);
+
+                const campusCell = document.createElement('td');
+                campusCell.textContent = reserva.campus_nombre;
+                row.appendChild(campusCell);
+
+                const accionesCell = document.createElement('td');
+                const editarButton = document.createElement('button');
+                editarButton.textContent = 'Editar';
+                editarButton.classList.add('boton-sesion');
+                editarButton.addEventListener('click', () => mostrarDetallesReserva(reserva));
+                accionesCell.appendChild(editarButton);
+
+                row.appendChild(accionesCell);
+                table.appendChild(row);
+            });
+
+            resultadosDiv.appendChild(table);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un problema al cargar las reservas.');
+        });
+}
+//-------------------------------------------------------
+//  PARA EL BOTON DE CHUYACA EN LO DE GUARDIA----------------------------------------------------------------
+function renderizarReservasChuyaca() {
+    fetch('/reservasChuyaca')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener las reservas de Chuyaca');
+            }
+            return response.json();
+        })
+        .then(reservas => {
+            const resultadosDiv = document.querySelector('.resultados-sesion');
+            resultadosDiv.innerHTML = ''; // Limpiar resultados anteriores
+
+            const table = document.createElement('table');
+            table.classList.add('reservas-table');
+
+            const headerRow = document.createElement('tr');
+            const headers = ['Código', 'Patente', 'Hora', 'Fecha', 'Nombre', 'Campus', 'Acciones'];
+            headers.forEach(headerText => {
+                const header = document.createElement('th');
+                header.textContent = headerText;
+                headerRow.appendChild(header);
+            });
+            table.appendChild(headerRow);
+
+            reservas.forEach(reserva => {
+                const row = document.createElement('tr');
+
+                const codigoCell = document.createElement('td');
+                codigoCell.textContent = reserva.id_estacionamiento;
+                row.appendChild(codigoCell);
+
+                const patenteCell = document.createElement('td');
+                patenteCell.textContent = reserva.id_vehiculo;
+                row.appendChild(patenteCell);
+
+                const horaCell = document.createElement('td');
+                horaCell.textContent = `${reserva.fecha_entrada} / ${reserva.fecha_salida}`;
+                row.appendChild(horaCell);
+
+                const fechaCell = document.createElement('td');
+                fechaCell.textContent = formatFecha(reserva.fecha_reserva);
+                row.appendChild(fechaCell);
+
+                const nombreCell = document.createElement('td');
+                nombreCell.textContent = reserva.usuario_nombre;
+                row.appendChild(nombreCell);
+
+                const campusCell = document.createElement('td');
+                campusCell.textContent = reserva.campus_nombre;
+                row.appendChild(campusCell);
+
+                const accionesCell = document.createElement('td');
+                const editarButton = document.createElement('button');
+                editarButton.textContent = 'Editar';
+                editarButton.classList.add('boton-sesion');
+                editarButton.addEventListener('click', () => mostrarDetallesReserva(reserva));
+                accionesCell.appendChild(editarButton);
+
+                const eliminarButton = document.createElement('button');
+                eliminarButton.textContent = 'Eliminar';
+                eliminarButton.classList.add('boton-sesion');
+                eliminarButton.addEventListener('click', () => eliminarReservaChuyaca(reserva));
+                accionesCell.appendChild(eliminarButton);
+
+
+
+                row.appendChild(accionesCell);
+                table.appendChild(row);
+            });
+
+            resultadosDiv.appendChild(table);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un problema al obtener las reservas de Chuyaca.');
+        });
+}
+//-------------------------------------------------------------------------------------------------
+
+//--------RESERVAS MEYER MOSTRAR-------------------------------
+function renderizarReservasMeyer() {
+    fetch('/reservasMeyer')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener las reservas de Meyer');
+            }
+            return response.json();
+        })
+        .then(reservas => {
+            const resultadosDiv = document.querySelector('.resultados-sesion');
+            resultadosDiv.innerHTML = ''; // Limpiar resultados anteriores
+
+            const table = document.createElement('table');
+            table.classList.add('reservas-table');
+
+            const headerRow = document.createElement('tr');
+            const headers = ['Código', 'Patente', 'Hora', 'Fecha', 'Nombre', 'Campus', 'Acciones'];
+            headers.forEach(headerText => {
+                const header = document.createElement('th');
+                header.textContent = headerText;
+                headerRow.appendChild(header);
+            });
+            table.appendChild(headerRow);
+
+            reservas.forEach(reserva => {
+                const row = document.createElement('tr');
+
+                const codigoCell = document.createElement('td');
+                codigoCell.textContent = reserva.id_estacionamiento;
+                row.appendChild(codigoCell);
+
+                const patenteCell = document.createElement('td');
+                patenteCell.textContent = reserva.id_vehiculo;
+                row.appendChild(patenteCell);
+
+                const horaCell = document.createElement('td');
+                horaCell.textContent = `${reserva.fecha_entrada} / ${reserva.fecha_salida}`;
+                row.appendChild(horaCell);
+
+                const fechaCell = document.createElement('td');
+                fechaCell.textContent = formatFecha(reserva.fecha_reserva);
+                row.appendChild(fechaCell);
+
+                const nombreCell = document.createElement('td');
+                nombreCell.textContent = reserva.usuario_nombre;
+                row.appendChild(nombreCell);
+
+                const campusCell = document.createElement('td');
+                campusCell.textContent = reserva.campus_nombre;
+                row.appendChild(campusCell);
+
+                const accionesCell = document.createElement('td');
+                const editarButton = document.createElement('button');
+                editarButton.textContent = 'Editar';
+                editarButton.classList.add('boton-sesion');
+                editarButton.addEventListener('click', () => mostrarDetallesReserva(reserva));
+                accionesCell.appendChild(editarButton);
+
+                const eliminarButton = document.createElement('button');
+                eliminarButton.textContent = 'Eliminar';
+                eliminarButton.classList.add('boton-sesion');
+                eliminarButton.addEventListener('click', () => eliminarReservaMeyer(reserva));
+                accionesCell.appendChild(eliminarButton);
+
+
+
+                row.appendChild(accionesCell);
+                table.appendChild(row);
+            });
+
+            resultadosDiv.appendChild(table);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un problema al obtener las reservas de Chuyaca.');
+        });
+}
+//--------------------------------------------------------------------------------------------------------------
+
 // Función para formatear fechas ISO 8601 y mostrar solo la fecha
 function formatFecha(fechaISO) {
     const fecha = new Date(fechaISO);
@@ -675,6 +912,52 @@ function mostrarDetallesReserva(reserva) {
     navigateTo('paginaGuardiaSesionesDatos');
 }
 //--------------------------------------------------------------------------
+//------------------------------Cargar reserva activa si se navega a la pagina de movilizas
+function cargarReservaActiva() {
+    fetch('/obtenerMiReservaActiva', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.length > 0) {
+            const reserva = data[0];
+            mostrarDetallesReservaActiva(reserva);
+            navigateTo('pageMiReservaActiva');
+        }
+    })
+    .catch(error => {
+        console.error('Error al obtener la reserva activa del usuario:', error);
+    });
+}
+
+function mostrarDetallesReservaActiva(reserva) {
+    const resultadosDiv = document.querySelector('.resultados-mi-reserva-activa');
+    resultadosDiv.innerHTML = ''; // Limpiar resultados anteriores
+
+    const detalleDiv = document.createElement('div');
+    detalleDiv.classList.add('detalle-reserva-activa');
+
+    const info = `
+        <p><strong>Código:</strong> ${reserva.id_estacionamiento}</p>
+        <p><strong>Patente:</strong> ${reserva.id_vehiculo}</p>
+        <p><strong>Hora:</strong> ${reserva.fecha_entrada} / ${reserva.fecha_salida}</p>
+        <p><strong>Fecha:</strong> ${formatFecha(reserva.fecha_reserva)}</p>
+        <p><strong>Nombre:</strong> ${reserva.usuario_nombre}</p>
+        <p><strong>Campus:</strong> ${reserva.campus_nombre}</p>
+    `;
+
+    detalleDiv.innerHTML = info;
+    resultadosDiv.appendChild(detalleDiv);
+
+}
+//---------------------------------------
+
+
+
+
 //CAMBIAR EL ESTADO DE RESERVA A FALSE-------------------------------------------------------------
 function eliminarReserva(reserva) {
     // Mostrar confirmación
@@ -711,6 +994,109 @@ function eliminarReserva(reserva) {
         // No hacer nada si se selecciona cancelar en la confirmación
         return;
     }
+}
+//-------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
+function eliminarReservaChuyaca(reserva) {
+    // Mostrar confirmación
+    if (confirm('¿Estás seguro que deseas eliminar esta reserva en Chuyaca?')) {
+        // Llamar al endpoint para actualizar el estado
+        fetch('/eliminarReservasChuyaca', {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_vehiculo: reserva.id_vehiculo,
+                fecha_entrada: reserva.fecha_entrada,
+                id_estacionamiento: reserva.id_estacionamiento
+                
+                
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al actualizar el estado de la reserva en Chuyaca');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Estado de reserva actualizado correctamente en Chuyaca:', data);
+            // Aquí podrías realizar alguna acción adicional si es necesario
+            renderizarReservasChuyaca(); // Actualizar la lista de reservas
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un problema al actualizar el estado de la reserva en Chuyaca.');
+        });
+    } else {
+        // No hacer nada si se selecciona cancelar en la confirmación
+        return;
+    }
+}
+//--------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
+function eliminarReservaMeyer(reserva) {
+    // Mostrar confirmación
+    if (confirm('¿Estás seguro que deseas eliminar esta reserva en Meyer?')) {
+        // Llamar al endpoint para actualizar el estado
+        fetch('/eliminarReservasMeyer', {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_vehiculo: reserva.id_vehiculo,
+                fecha_entrada: reserva.fecha_entrada,
+                id_estacionamiento: reserva.id_estacionamiento
+                
+                
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al actualizar el estado de la reserva en Meyer');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Estado de reserva actualizado correctamente en Meyer:', data);
+            // Aquí podrías realizar alguna acción adicional si es necesario
+            renderizarReservasMeyer(); // Actualizar la lista de reservas
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un problema al actualizar el estado de la reserva en Meyer.');
+        });
+    } else {
+        // No hacer nada si se selecciona cancelar en la confirmación
+        return;
+    }
+}
+//--------------------------------------------------------------
+//-------------------------------------------------------------- CANCELAR MI PROPIA RESERVA
+function cancelarMiReservaPersonal() {
+    // Obtener el correo del usuario logueado
+    fetch('/cancelarMiReservaPersonal', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Reserva cancelada:', data);
+
+        // Redirigir según el tipo de usuario
+        if (data.tipoUsuario === 'Administrador' || data.tipoUsuario === 'Guardia') {
+            navigateTo('paginaGuardia1');
+        } else {
+            navigateTo('pageMovilizas');
+        }
+    })
+    .catch(error => {
+        console.error('Error al cancelar la reserva:', error);
+    });
 }
 
 
