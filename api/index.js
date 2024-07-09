@@ -18,11 +18,10 @@ app.use((req, res, next) => {
 
 //conexión a la base de datos
 const pool = new Pool({
-    user: 'postgres',
-    password: 'mere1',
-    host: 'localhost', 
-    database: 'parkingtest',
-    port: 5432, 
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 // para parsear JSON
