@@ -532,8 +532,186 @@ function cargarPagina1() {
 }
 
 
+function cargarSesiones() {
+    fetch('/verificarSesion')
+        .then(response => response.json())
+        .then(data => {
+            if (data.autenticado && (data.tipo === 'Guardia' || data.tipo === 'Administrador')) {
+                console.log('Acceso permitido');
+                // Ejecutar la lógica específica de la página aquí
+            } else {
+                console.log('Acceso denegado, redirigiendo a la página de inicio');
+                navigateTo('page2');
+            }
+        })
+        .catch(error => {
+            console.error('Error al verificar la sesión:', error);
+            navigateTo('page2');
+        });
+}
+//--------------------------------------------------------------
 
+// Función para obtener y mostrar reservas activas----------------------------------------------------
+async function mostrarActivos() {
+    try {
+        const response = await fetch('/obtenerReservasActivas');
+        const reservas = await response.json();
 
+        if (response.ok) {
+            renderizarReservas(reservas);
+        } else {
+            console.error('Error al obtener reservas activas:', reservas.message);
+        }
+    } catch (error) {
+        console.error('Error en la solicitud para obtener reservas activas:', error);
+    }
+}
+
+// Función para renderizar reservas en el HTML
+// Función para renderizar reservas en el HTML
+function renderizarReservas(reservas) {
+    const resultadosDiv = document.querySelector('.resultados-sesion');
+    resultadosDiv.innerHTML = ''; // Limpiar resultados anteriores
+
+    const table = document.createElement('table');
+    table.classList.add('reservas-table');
+
+    const headerRow = document.createElement('tr');
+    const headers = ['Código', 'Patente', 'Hora', 'Fecha', 'Nombre', 'Campus', 'Acciones'];
+    headers.forEach(headerText => {
+        const header = document.createElement('th');
+        header.textContent = headerText;
+        headerRow.appendChild(header);
+    });
+    table.appendChild(headerRow);
+
+    reservas.forEach(reserva => {
+        const row = document.createElement('tr');
+
+        const codigoCell = document.createElement('td');
+        codigoCell.textContent = reserva.id_estacionamiento;
+        row.appendChild(codigoCell);
+
+        const patenteCell = document.createElement('td');
+        patenteCell.textContent = reserva.id_vehiculo;
+        row.appendChild(patenteCell);
+
+        const horaCell = document.createElement('td');
+        horaCell.textContent = `${reserva.fecha_entrada} / ${reserva.fecha_salida}`;
+        row.appendChild(horaCell);
+
+        const fechaCell = document.createElement('td');
+        fechaCell.textContent = formatFecha(reserva.fecha_reserva);
+        row.appendChild(fechaCell);
+
+        const nombreCell = document.createElement('td');
+        nombreCell.textContent = reserva.usuario_nombre;
+        row.appendChild(nombreCell);
+
+        const campusCell = document.createElement('td');
+        campusCell.textContent = reserva.campus_nombre;
+        row.appendChild(campusCell);
+
+        const accionesCell = document.createElement('td');
+        const editarButton = document.createElement('button');
+        editarButton.textContent = 'Editar';
+        editarButton.classList.add('boton-sesion');
+        editarButton.addEventListener('click', () => mostrarDetallesReserva(reserva));
+        accionesCell.appendChild(editarButton);
+
+        const eliminarButton = document.createElement('button');
+        eliminarButton.textContent = 'Eliminar';
+        eliminarButton.classList.add('boton-sesion');
+        eliminarButton.addEventListener('click', () => eliminarReserva(reserva));
+        accionesCell.appendChild(eliminarButton);
+
+        row.appendChild(accionesCell);
+        table.appendChild(row);
+    });
+
+    resultadosDiv.appendChild(table);
+}
+
+// Función para formatear fechas ISO 8601 y mostrar solo la fecha
+function formatFecha(fechaISO) {
+    const fecha = new Date(fechaISO);
+    const year = fecha.getFullYear();
+    const month = String(fecha.getMonth() + 1).padStart(2, '0');
+    const day = String(fecha.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+//--------------------------------------------------------------------------------------
+// Función para mostrar detalles específicos de una reserva
+function mostrarDetallesReserva(reserva) {
+    const detallesDiv = document.querySelector('.resultados-sesion-datos');
+    detallesDiv.innerHTML = ''; // Limpiar detalles anteriores
+
+    const detallesLista = document.createElement('ul');
+    detallesLista.classList.add('detalles-reserva-lista');
+
+    const detalles = [
+        { titulo: 'Modelo', dato: reserva.vehiculo_descripcion },
+        { titulo: 'Patente', dato: reserva.id_vehiculo },
+        { titulo: 'Campus', dato: reserva.campus_nombre },
+        { titulo: 'Lugar Estacionamiento', dato: reserva.lugar_estacionamiento_descripcion },
+        { titulo: 'Nombre', dato: reserva.usuario_nombre },
+        { titulo: 'Categoría', dato: reserva.usuario_tipo },
+        { titulo: 'Correo', dato: reserva.usuario_correo }
+    ];
+
+    detalles.forEach(detalle => {
+        const detalleItem = document.createElement('li');
+        const tituloSpan = document.createElement('span');
+        tituloSpan.textContent = `${detalle.titulo}: `;
+        detalleItem.appendChild(tituloSpan);
+        detalleItem.textContent += detalle.dato;
+        detallesLista.appendChild(detalleItem);
+    });
+
+    detallesDiv.appendChild(detallesLista);
+
+    // Navegar a la página de detalles de reserva
+    navigateTo('paginaGuardiaSesionesDatos');
+}
+//--------------------------------------------------------------------------
+//CAMBIAR EL ESTADO DE RESERVA A FALSE-------------------------------------------------------------
+function eliminarReserva(reserva) {
+    // Mostrar confirmación
+    if (confirm('¿Estás seguro que deseas eliminar esta reserva?')) {
+        // Llamar al endpoint para actualizar el estado
+        fetch(`/actualizarEstadoReserva`, {
+            method: 'PUT', // O el método correcto que corresponda
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_vehiculo: reserva.id_vehiculo,
+                fecha_entrada: reserva.fecha_entrada,
+                id_estacionamiento: reserva.id_estacionamiento
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al actualizar el estado de la reserva');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Puedes manejar la respuesta si es necesario
+            console.log('Estado de reserva actualizado correctamente:', data);
+            mostrarActivos()
+            // Aquí podrías realizar alguna acción adicional si es necesario
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un problema al actualizar el estado de la reserva.');
+        });
+    } else {
+        // No hacer nada si se selecciona cancelar en la confirmación
+        return;
+    }
+}
 
 
 // Función para obtener la patente registrada desde la URL temporal -------------------------------------------

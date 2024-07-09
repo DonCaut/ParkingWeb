@@ -740,3 +740,108 @@ button.boton-submit:hover {
 .modal-buttons-chuyaca button:hover {
   background-color: #0056b3; /* Color de fondo del botón al pasar el mouse */
 }
+
+/* Estilos para los botones de ver las reservas por el guardia o administrador --------------------------------*/
+/* Estilos para el encabezado */
+/* Estilos para el contenedor principal */
+.content {
+  margin-top: 60px; /* Espacio superior para evitar que el contenido se solape con el header */
+  width: 70%; /* Ancho del contenido */
+  margin: 0 auto; /* Centrar horizontalmente */
+}
+
+/* Estilos para el header */
+.header-sesion {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(1.3);
+  width: 70%;
+  background-color: #fff; /* Color de fondo deseado */
+  z-index: 1000; /* Ajusta según sea necesario */
+  padding: 10px; /* Espaciado interno del header */
+  border-bottom: 1px solid #ccc; /* Borde inferior */
+}
+
+/* Estilos para el header interno */
+.header-sesion .header-sesion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribuye los elementos alrededor */
+}
+
+.header-sesion .header-left-sesion {
+  margin-right: 10px; /* Espacio derecho del botón */
+}
+
+.header-sesion .header-center-sesion {
+  flex: 1; /* Ocupa el espacio necesario */
+  text-align: center;
+  margin: 0;
+}
+
+.header-sesion .header-right-sesion {
+  display: flex;
+  align-items: center;
+}
+
+.header-sesion .ordenar-por {
+  margin-right: 10px; /* Espacio derecho del texto 'Ordenar por:' */
+}
+
+.header-sesion .botones-orden-sesion {
+  display: flex;
+}
+
+.header-sesion .botones-orden-sesion .boton-sesion {
+  margin-right: 10px; /* Espacio entre botones */
+  padding: 8px 12px;
+  border: none;
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white;
+  cursor: pointer;
+}
+
+.header-sesion .botones-orden-sesion .boton-sesion:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+
+.resultados-sesion {
+  margin-top: 60px; /* Espacio superior para evitar que se solape con el header */
+  /* Estilos adicionales según necesidad */
+}
+
+
+/* Estilos para la tabla de reservas Activas------------------------------CREADA CON EL BOTON ACTIVAS */
+.reservas-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.reservas-table th, .reservas-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.reservas-table th {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+.reservas-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.reservas-table tr:hover {
+  background-color: #ddd;
+}
+
+.reservas-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+}

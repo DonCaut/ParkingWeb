@@ -336,7 +336,52 @@
   <p>Bienvenido Guardia/Administrador</p>
   <p>¿Qué harás hoy?</p>
   <button class="page-button" data-target="pageMovilizas"> Reservar</button>
-  <button class="page-button" data-target="page1"> Editar</button>
+  <button class="page-button" data-target="paginaGuardiaSesiones"> Editar</button>
+</div>
+
+<!-- PAGINA 2 del guardia donde tiene las opciones para ver las reservas -->
+<div class="content" id="paginaGuardiaSesiones">
+  <header class="header-sesion">
+    <div class="header-sesion-header">
+      <div class="header-left-sesion">
+          <button class="boton-sesion">&#9664;</button>
+      </div>
+      <div class="header-center-sesion">
+          <h1>Historial de reservas</h1>
+      </div>
+    </div>
+
+      <div class="header-right-sesion">
+          <div class="ordenar-por">
+              <span>Ordenar por:</span>
+          </div>
+          <div class="botones-orden-sesion">
+              <button class="boton-sesion" onclick="mostrarActivos()">Activos</button>
+              <button class="boton-sesion">Todas las reservas</button>
+              <button class="boton-sesion">Chuyaca</button>
+              <button class="boton-sesion">Meyer</button>
+          </div>
+      </div>
+  </header>
+  <div class="resultados-sesion">
+      <!-- Aquí irán los resultados de las reservas, pendiente de implementación -->
+  </div>
+</div>
+
+<!-- PAGINA Donde se colocan los datos más especificos de la reserva -->
+<div class="content" id="paginaGuardiaSesionesDatos">
+  <header class="header-sesion">
+    <div class="header-sesion-header">
+      <div class="header-left-sesion">
+          <button class="boton-sesion">&#9664;</button>
+      </div>
+      <div class="header-center-sesion">
+          <h1>Datos de reserva</h1>
+      </div>
+    </div>
+    <div class="resultados-sesion-datos">
+      <!-- Aquí irán los resultados más especificos -->
+    </div>
 </div>
 
 

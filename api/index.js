@@ -236,6 +236,87 @@ app.get('/verificarSesion', (req, res) => {
 });
 //--------------------------------
 
+//-------TODO LO QUE CORRESPONDE A CONSULTAS DE ADMIN Y GUARDIAS-------------------------------------------
+// Ruta para obtener reservas activas-------------------------------
+app.get('/obtenerReservasActivas', async (req, res) => {
+    try {
+        const consulta = `
+            SELECT 
+                o.ID_Estacionamiento,
+                o.ID_Vehiculo,
+                o.Fecha_Entrada,
+                o.Fecha_Salida,
+                o.Estado,
+                r.fecha_reserva,
+                u.Nombre AS Usuario_Nombre,
+                u.Correo AS Usuario_Correo,
+                u.Tipo AS Usuario_Tipo,
+                cs.Nombre AS Campus_Nombre,
+                v.Descripcion AS Vehiculo_Descripcion,
+                v.Año AS Vehiculo_Año,
+                tv.Nombre AS Tipo_Vehiculo,
+                le.Descripcion AS Lugar_Estacionamiento_Descripcion
+            FROM 
+                Ocupa o
+            JOIN 
+                Reserva r ON o.ID_Estacionamiento = r.ID_Estacionamiento
+            JOIN 
+                Usuario u ON r.ID_Usuario = u.Correo
+            JOIN 
+                Estacionamiento e ON r.ID_Estacionamiento = e.ID_Estacionamiento
+            JOIN 
+                Campus_Sede cs ON e.ID_Campus = cs.ID_Campus
+            JOIN 
+                Vehiculo v ON o.ID_Vehiculo = v.Patente
+            JOIN 
+                Tipo_Vehiculo tv ON v.ID_Tipo_V = tv.ID_Tipo_V
+            JOIN 
+                Lugar_Estacionamiento le ON e.ID_Lugar = le.ID_Lugar
+            WHERE 
+                o.Estado = true;
+        `;
+
+        const resultado = await pool.query(consulta);
+        res.json(resultado.rows);
+    } catch (error) {
+        console.error('Error al obtener reservas activas:', error);
+        res.status(500).json({ success: false, message: 'Error al obtener reservas activas' });
+    }
+});
+//----------------------------------------------------------------------------------------------
+//--------------------------ACTUALIZAR A FALSE-------------------------------
+app.put('/actualizarEstadoReserva', (req, res) => {
+    const { id_vehiculo, fecha_entrada, id_estacionamiento} = req.body;
+
+
+    console.log(id_estacionamiento);
+    console.log( id_vehiculo);
+    console.log(fecha_entrada);
+
+    
+    // Consulta SQL para actualizar el estado en la tabla Ocupa
+    const query = `
+        UPDATE Ocupa
+        SET Estado = false
+        WHERE ID_Vehiculo = $1
+        AND Fecha_Entrada = $2
+        AND ID_Estacionamiento = $3
+        AND Estado = true
+    `;
+    const values = [id_vehiculo, fecha_entrada, id_estacionamiento];
+
+    // Ejecutar la consulta SQL
+    pool.query(query, values, (error, result) => {
+        if (error) {
+            console.error('Error al actualizar estado de reserva:', error);
+            res.status(500).json({ message: 'Error al actualizar estado de reserva' });
+        } else {
+            console.log('Estado de reserva actualizado correctamente');
+            res.json({ message: 'Estado de reserva actualizado correctamente' });
+        }
+    });
+});
+
 
 // para ver la tabla usaurios
 app.get('/usuario', async (req, res) => {
