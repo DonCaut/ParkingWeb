@@ -656,9 +656,15 @@ app.get('/registros', async (req, res) => {
 });
 
 // Más rutas pronto
-
-// Iniciar el servidor
-const puerto = 3000; 
-app.listen(puerto, () => {
-    console.log(`Servidor Express escuchando en el puerto ${puerto}`);
+//servidor por heroku
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
+
+
+// Iniciar el servidor para local
+//const puerto = 3000; 
+//app.listen(puerto, () => {
+//    console.log(`Servidor Express escuchando en el puerto ${puerto}`);
+//});
