@@ -6,10 +6,15 @@ body {
   justify-content: center;
   align-items: center;
   background-color: rgba(243, 246, 255, 1);
+  overflow: auto;
+  zoom: 0.7;
 }
 
 .content {
   text-align: center;
+  transform: scale(0.9);
+  margin: 5%;
+  padding-top: 200px;
   display: none; /* Oculta todo el contenido por defecto */
 }
 
@@ -111,6 +116,7 @@ button {
   width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
   position: relative;
   top: -200px; /* para cortar la parte superior de la imagen */
+  overflow: hidden;
  }
 
  .inicie-sesion-texto {
@@ -530,8 +536,8 @@ button.boton-submit:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 102px 142px 114px 66.8px;
-  width: 1440px;
+  padding: 250px 142px 114px 66.8px;
+  width: 1300px;
   box-sizing: border-box;
 }
 

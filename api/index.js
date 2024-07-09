@@ -24,6 +24,8 @@ const pool = new Pool({
     }
 });
 
+
+
 // para parsear JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
